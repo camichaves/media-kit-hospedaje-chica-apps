@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Media Kit · Camila Chaves | @chica_apps</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --vd:  #2D1054;
+  --vm:  #5E3A9E;
+  --vs:  #9B6FD4;
+  --lav: #D8B4F8;
+  --lp:  #EDE5FF;
+  --cr:  #F5EBB0;
+  --ro:  #F4BFDB;
+  --wh:  #FFFFFF;
+  --dk:  #1A0F2E;
+  --pg:  #F8F4FF;
+  --font-d: 'Syne', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-b: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-b); background: var(--pg); color: var(--vd); -webkit-text-size-adjust: 100%; overflow-x: hidden; }
+
+/* ── NAV ── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 14px clamp(16px, 5vw, 48px);
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(26,15,46,0.85); backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.nav-brand { font-family: var(--font-d); font-weight: 800; font-size: 16px; color: var(--lav); letter-spacing: -.01em; }
+.nav-handle { font-size: 12px; color: rgba(216,180,248,.55); margin-top: 1px; }
+.nav-cta {
+  padding: 8px 18px; border-radius: 99px;
+  background: var(--lav); color: var(--vd);
+  font-family: var(--font-b); font-size: 13px; font-weight: 600;
+  text-decoration: none; white-space: nowrap; transition: opacity .15s;
+}
+.nav-cta:hover { opacity: .85; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100svh; display: flex; align-items: center;
+  background: var(--dk);
+  padding: calc(80px + clamp(32px,8vw,80px)) clamp(16px,6vw,80px) clamp(48px,8vw,80px);
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute;
+  width: clamp(320px,70vw,700px); height: clamp(320px,70vw,700px);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(94,58,158,.55) 0%, transparent 70%);
+  top: -15%; right: -15%; pointer-events: none;
+}
+.hero::after {
+  content: ''; position: absolute;
+  width: clamp(180px,40vw,380px); height: clamp(180px,40vw,380px);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(244,191,219,.18) 0%, transparent 70%);
+  bottom: 5%; left: -8%; pointer-events: none;
+}
+.hero-inner { max-width: 760px; position: relative; z-index: 1; }
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 14px; border-radius: 99px;
+  background: rgba(216,180,248,.12); border: 1px solid rgba(216,180,248,.25);
+  font-size: 11px; font-weight: 600; color: var(--lav); letter-spacing: .08em; text-transform: uppercase;
+  margin-bottom: 28px;
+}
+.hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--lav); animation: blink 2s infinite; }
+@keyframes blink { 0%,100% { opacity:1; } 50% { opacity:.3; } }
+
+.hero h1 {
+  font-family: var(--font-d); font-weight: 800;
+  font-size: clamp(40px, 9vw, 76px); line-height: .95;
+  color: #fff; margin-bottom: 20px; letter-spacing: -.02em;
+}
+.hero h1 em { color: var(--lav); font-style: normal; display: block; }
+.hero-sub {
+  font-size: clamp(15px, 2.5vw, 18px); line-height: 1.65;
+  color: rgba(255,255,255,.65); margin-bottom: 32px; max-width: 560px;
+}
+.hero-sub strong { color: var(--cr); font-weight: 600; }
+
+.hero-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
+.pill {
+  padding: 6px 14px; border-radius: 99px; font-size: 12px; font-weight: 500;
+}
+.pill-lav  { background: rgba(216,180,248,.15); color: var(--lav); border: 1px solid rgba(216,180,248,.3); }
+.pill-cr   { background: rgba(245,235,176,.15); color: var(--cr);  border: 1px solid rgba(245,235,176,.3); }
+.pill-ro   { background: rgba(244,191,219,.15); color: var(--ro);  border: 1px solid rgba(244,191,219,.3); }
+
+.hero-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: rgba(216,180,248,.15);
+  border-radius: 16px; overflow: hidden; border: 1px solid rgba(216,180,248,.15);
+}
+@media(max-width:480px){ .hero-stats { grid-template-columns: 1fr 1fr; } }
+.hstat {
+  padding: clamp(16px,4vw,24px); background: rgba(26,15,46,.7);
+  backdrop-filter: blur(8px);
+}
+.hstat-num {
+  font-family: var(--font-d); font-size: clamp(22px,5vw,32px); font-weight: 800;
+  color: #fff; line-height: 1; margin-bottom: 4px;
+}
+.hstat-num span { color: var(--lav); }
+.hstat-label { font-size: 11px; color: rgba(255,255,255,.4); line-height: 1.3; }
+
+/* ── SECTION BASE ── */
+.section { padding: clamp(56px,10vw,100px) clamp(16px,6vw,80px); }
+.section-inner { max-width: 960px; margin: 0 auto; }
+.slabel {
+  font-family: var(--font-d); font-size: 10px; font-weight: 700;
+  letter-spacing: .22em; text-transform: uppercase; color: var(--vs);
+  margin-bottom: 8px; display: flex; align-items: center; gap: 10px;
+}
+.slabel::after { content: ''; flex: 1; height: 1px; background: rgba(155,111,212,.2); max-width: 80px; }
+.stitle {
+  font-family: var(--font-d); font-size: clamp(26px,6vw,42px); font-weight: 800;
+  color: var(--vd); margin-bottom: clamp(28px,5vw,44px); line-height: 1.05; letter-spacing: -.02em;
+}
+.stitle em { color: var(--vm); font-style: normal; }
+
+/* ── AUDIENCE ── */
+.audience-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media(max-width:600px){ .audience-grid { grid-template-columns: 1fr; } }
+
+.aud-card {
+  border-radius: 16px; padding: clamp(20px,5vw,28px);
+  border: 1px solid rgba(93,58,158,.12);
+}
+.aud-card.dark { background: var(--dk); }
+.aud-card.light { background: var(--lp); }
+
+.aud-title {
+  font-family: var(--font-d); font-size: 11px; font-weight: 700;
+  letter-spacing: .15em; text-transform: uppercase; margin-bottom: 16px;
+}
+.dark .aud-title { color: var(--vs); }
+.light .aud-title { color: var(--vm); }
+
+.aud-item { margin-bottom: 12px; }
+.aud-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 5px; }
+.aud-country { font-size: 13px; font-weight: 500; }
+.dark .aud-country { color: rgba(255,255,255,.8); }
+.light .aud-country { color: var(--vd); }
+.aud-pct { font-family: var(--font-d); font-size: 14px; font-weight: 800; }
+.dark .aud-pct { color: var(--lav); }
+.light .aud-pct { color: var(--vm); }
+.bar-track { height: 4px; border-radius: 99px; background: rgba(255,255,255,.08); overflow: hidden; }
+.light .bar-track { background: rgba(93,58,158,.12); }
+.bar-fill { height: 100%; border-radius: 99px; }
+.dark .bar-fill { background: linear-gradient(90deg, var(--vs), var(--lav)); }
+.light .bar-fill { background: linear-gradient(90deg, var(--vm), var(--vs)); }
+
+.gender-row { display: flex; gap: 16px; }
+.gender-item { flex: 1; }
+.gender-num { font-family: var(--font-d); font-size: clamp(28px,6vw,36px); font-weight: 800; color: #fff; line-height: 1; }
+.gender-label { font-size: 12px; color: rgba(255,255,255,.45); margin-top: 3px; }
+
+.insight-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 16px; }
+@media(max-width:500px){ .insight-grid { grid-template-columns: 1fr 1fr; } }
+.insight-card {
+  border-radius: 12px; padding: 14px 16px;
+  background: rgba(255,255,255,.04); border: 1px solid rgba(216,180,248,.12);
+  text-align: center;
+}
+.insight-num { font-family: var(--font-d); font-size: 22px; font-weight: 800; color: var(--cr); }
+.insight-label { font-size: 10px; color: rgba(255,255,255,.4); margin-top: 3px; line-height: 1.3; }
+
+/* ── WHY THIS AUDIENCE ── */
+.why-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+@media(max-width:700px){ .why-grid { grid-template-columns: 1fr 1fr; } }
+@media(max-width:440px){ .why-grid { grid-template-columns: 1fr; } }
+.why-card {
+  border-radius: 14px; padding: clamp(18px,4vw,24px);
+  background: #fff; border: 1px solid rgba(93,58,158,.1);
+}
+.why-icon { font-size: 28px; margin-bottom: 12px; }
+.why-title { font-family: var(--font-d); font-size: 14px; font-weight: 800; color: var(--vd); margin-bottom: 6px; }
+.why-text { font-size: 13px; color: #666; line-height: 1.55; }
+
+/* ── CANJE ── */
+.canje-section { background: var(--dk); }
+.canje-section .stitle { color: #fff; }
+.canje-section .slabel { color: var(--vs); }
+
+.canje-intro {
+  font-size: clamp(15px,2.5vw,17px); color: rgba(255,255,255,.65);
+  line-height: 1.7; margin-bottom: 36px; max-width: 620px;
+}
+.canje-intro strong { color: var(--cr); }
+
+.canje-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+@media(min-width:640px){ .canje-grid { grid-template-columns: repeat(3,1fr); } }
+
+.canje-card {
+  border-radius: 20px; overflow: hidden;
+  border: 1px solid rgba(216,180,248,.15);
+  transition: transform .2s, box-shadow .2s;
+}
+.canje-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,.4); }
+
+.canje-head {
+  padding: clamp(20px,5vw,28px); min-height: 190px;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.canje-head.a { background: linear-gradient(145deg, #3b1870, #1a0f2e); }
+.canje-head.b { background: linear-gradient(145deg, #1d0b40, #2d1054); }
+.canje-head.c { background: linear-gradient(145deg, #4a2080, #2d1054); }
+
+.canje-letter {
+  font-family: var(--font-d); font-size: clamp(52px,12vw,72px); font-weight: 800;
+  line-height: 1; opacity: .12;
+}
+.canje-head.a .canje-letter { color: var(--lav); }
+.canje-head.b .canje-letter { color: var(--cr); }
+.canje-head.c .canje-letter { color: var(--ro); }
+
+.canje-badge {
+  display: inline-flex; padding: 5px 12px; border-radius: 99px;
+  font-size: 11px; font-weight: 700; align-self: flex-start;
+}
+.canje-head.a .canje-badge { background: rgba(216,180,248,.18); color: var(--lav); border: 1px solid rgba(216,180,248,.3); }
+.canje-head.b .canje-badge { background: rgba(245,235,176,.15); color: var(--cr);  border: 1px solid rgba(245,235,176,.3); }
+.canje-head.c .canje-badge { background: rgba(244,191,219,.15); color: var(--ro);  border: 1px solid rgba(244,191,219,.3); }
+
+.canje-body { padding: clamp(18px,4vw,24px); background: rgba(255,255,255,.03); border-top: 1px solid rgba(216,180,248,.08); }
+.canje-title { font-family: var(--font-d); font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 10px; }
+.canje-list { list-style: none; }
+.canje-list li {
+  display: flex; align-items: flex-start; gap: 8px;
+  font-size: 13px; color: rgba(255,255,255,.65); line-height: 1.5; margin-bottom: 8px;
+}
+.canje-list li::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  flex-shrink: 0; margin-top: 6px;
+}
+.canje-card:nth-child(1) .canje-list li::before { background: var(--lav); }
+.canje-card:nth-child(2) .canje-list li::before { background: var(--cr); }
+.canje-card:nth-child(3) .canje-list li::before { background: var(--ro); }
+
+.canje-note {
+  margin-top: 32px; padding: 18px 22px; border-radius: 12px;
+  background: rgba(216,180,248,.06); border: 1px solid rgba(216,180,248,.15);
+  font-size: 13px; color: rgba(255,255,255,.55); line-height: 1.65;
+}
+.canje-note strong { color: var(--lav); }
+
+/* ── PROCESO ── */
+.proceso-steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; position: relative; }
+@media(max-width:700px){ .proceso-steps { grid-template-columns: 1fr 1fr; } }
+@media(max-width:400px){ .proceso-steps { grid-template-columns: 1fr; } }
+
+.proceso-step {
+  padding: clamp(18px,4vw,24px); text-align: center; position: relative;
+}
+.proceso-step:not(:last-child)::after {
+  content: '→';
+  position: absolute; right: -8px; top: 50%; transform: translateY(-50%);
+  color: var(--vs); font-size: 18px; z-index: 1;
+}
+@media(max-width:700px){ .proceso-step:nth-child(2)::after { content: none; } }
+@media(max-width:400px){ .proceso-step::after { content: none !important; } }
+
+.paso-num {
+  width: 40px; height: 40px; border-radius: 12px;
+  background: var(--lp); color: var(--vm);
+  font-family: var(--font-d); font-size: 18px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 12px; border: 1px solid rgba(93,58,158,.2);
+}
+.paso-title { font-family: var(--font-d); font-size: 13px; font-weight: 800; color: var(--vd); margin-bottom: 6px; }
+.paso-text { font-size: 12px; color: #777; line-height: 1.5; }
+
+/* ── BENEFICIOS ── */
+.beneficios-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+@media(min-width:580px){ .beneficios-grid { grid-template-columns: 1fr 1fr 1fr; } }
+
+.ben-card {
+  border-radius: 18px; padding: clamp(22px,5vw,30px);
+  position: relative; overflow: hidden;
+}
+.ben-card.a { background: linear-gradient(145deg, var(--vd), var(--vm)); }
+.ben-card.b { background: linear-gradient(145deg, #2a1a58, var(--vd)); }
+.ben-card.c { background: linear-gradient(145deg, var(--vm), var(--vs)); }
+
+.ben-card::before {
+  content: ''; position: absolute;
+  width: 160px; height: 160px; border-radius: 50%;
+  background: rgba(255,255,255,.04);
+  top: -40px; right: -40px; pointer-events: none;
+}
+.ben-icon { font-size: 32px; margin-bottom: 14px; position: relative; }
+.ben-title { font-family: var(--font-d); font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 8px; position: relative; }
+.ben-text { font-size: 13px; color: rgba(255,255,255,.65); line-height: 1.65; position: relative; }
+.ben-text strong { color: var(--lav); }
+.ben-card.b .ben-text strong { color: var(--cr); }
+.ben-card.c .ben-text strong { color: var(--ro); }
+
+/* ── VIDEOS ── */
+.videos-section { background: #fff; }
+.videos-section .stitle { color: var(--vd); }
+
+.videos-intro {
+  font-size: clamp(15px,2.5vw,17px); color: #555; line-height: 1.7;
+  margin-bottom: 36px; max-width: 600px;
+}
+
+.videos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+@media(max-width:900px){ .videos-grid { grid-template-columns: repeat(2, 1fr); } }
+@media(max-width:560px){ .videos-grid { grid-template-columns: 1fr; } }
+
+.video-item { display: flex; flex-direction: column; gap: 0; }
+.video-rank {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 8px;
+}
+.rank-badge {
+  width: 24px; height: 24px; border-radius: 8px;
+  font-family: var(--font-d); font-size: 11px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.rank-1 { background: var(--cr); color: var(--vd); }
+.rank-2 { background: var(--lav); color: var(--vd); }
+.rank-3 { background: var(--ro); color: var(--vd); }
+.rank-n { background: var(--lp); color: var(--vm); }
+.rank-label { font-size: 11px; color: #999; font-weight: 500; }
+
+.video-embed-wrap {
+  border-radius: 14px; overflow: hidden;
+  border: 1px solid rgba(93,58,158,.1);
+  background: var(--lp);
+}
+.video-embed-wrap .instagram-media {
+  min-width: unset !important;
+  width: 100% !important;
+  margin: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+}
+
+/* ── CTA ── */
+.cta-section {
+  background: var(--vd);
+  padding: clamp(56px,10vw,100px) clamp(16px,6vw,80px);
+  text-align: center; position: relative; overflow: hidden;
+}
+.cta-section::before {
+  content: ''; position: absolute;
+  width: 500px; height: 500px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(155,111,212,.3) 0%, transparent 70%);
+  top: -150px; left: 50%; transform: translateX(-50%);
+  pointer-events: none;
+}
+.cta-section .section-inner { position: relative; z-index: 1; }
+.cta-section .slabel { color: var(--vs); justify-content: center; }
+.cta-section .slabel::after { display: none; }
+.cta-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 14px; border-radius: 99px; margin-bottom: 20px;
+  background: rgba(216,180,248,.12); border: 1px solid rgba(216,180,248,.25);
+  font-size: 11px; font-weight: 600; color: var(--lav); letter-spacing: .08em; text-transform: uppercase;
+}
+.cta-title {
+  font-family: var(--font-d); font-size: clamp(32px,7vw,58px); font-weight: 800;
+  color: #fff; line-height: 1; letter-spacing: -.02em; margin-bottom: 18px;
+}
+.cta-title em { color: var(--lav); font-style: normal; }
+.cta-text { font-size: clamp(15px,2.5vw,17px); color: rgba(255,255,255,.6); line-height: 1.65; margin-bottom: 36px; max-width: 520px; margin-left: auto; margin-right: auto; }
+.cta-text strong { color: var(--cr); }
+
+.cta-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.btn-primary {
+  padding: 14px 28px; border-radius: 99px;
+  background: var(--lav); color: var(--vd);
+  font-family: var(--font-b); font-size: 15px; font-weight: 700;
+  text-decoration: none; transition: opacity .15s, transform .15s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-primary:hover { opacity: .9; transform: translateY(-2px); }
+.btn-secondary {
+  padding: 14px 28px; border-radius: 99px;
+  background: transparent; color: rgba(255,255,255,.8);
+  border: 1.5px solid rgba(255,255,255,.2);
+  font-family: var(--font-b); font-size: 15px; font-weight: 600;
+  text-decoration: none; transition: border-color .15s, color .15s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-secondary:hover { border-color: rgba(255,255,255,.5); color: #fff; }
+
+.cta-divider {
+  margin-top: 56px; padding-top: 36px;
+  border-top: 1px solid rgba(216,180,248,.12);
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 32px;
+}
+.cta-stat-item { text-align: center; }
+.cta-stat-num {
+  font-family: var(--font-d); font-size: 28px; font-weight: 800; color: #fff;
+}
+.cta-stat-num span { color: var(--lav); }
+.cta-stat-label { font-size: 11px; color: rgba(255,255,255,.4); margin-top: 2px; }
+
+/* ── FOOTER ── */
+.footer {
+  background: var(--dk); padding: 24px clamp(16px,5vw,48px);
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px;
+}
+.footer-brand { font-family: var(--font-d); font-size: 14px; font-weight: 800; color: var(--lav); }
+.footer-text { font-size: 11px; color: rgba(255,255,255,.3); }
+.footer-ig {
+  font-size: 12px; color: rgba(255,255,255,.5); text-decoration: none;
+  border: 1px solid rgba(255,255,255,.15); padding: 5px 12px; border-radius: 99px;
+  transition: border-color .15s, color .15s;
+}
+.footer-ig:hover { border-color: var(--lav); color: var(--lav); }
+
+/* ── DIVIDER ── */
+hr.dv { border: none; border-top: 1px solid rgba(93,58,158,.1); margin: clamp(32px,6vw,56px) 0; }
+
+/* ── HIGHLIGHT BOX ── */
+.highlight-box {
+  border-radius: 14px; padding: clamp(16px,4vw,22px) clamp(18px,5vw,26px);
+  background: var(--lp); border: 1px solid rgba(93,58,158,.15);
+  font-size: 14px; color: var(--vd); line-height: 1.7; margin-bottom: 32px;
+}
+.highlight-box strong { font-weight: 700; }
+
+/* ── HARVARD BANNER ── */
+.harvard-banner {
+  border-radius: 16px; padding: clamp(20px,5vw,28px);
+  background: linear-gradient(135deg, rgba(165,28,48,.12), rgba(45,16,84,.8));
+  border: 1px solid rgba(165,28,48,.2);
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  margin-bottom: 36px;
+}
+.harvard-emoji { font-size: 36px; flex-shrink: 0; }
+.harvard-text h3 {
+  font-family: var(--font-d); font-size: 16px; font-weight: 800;
+  color: #fff; margin-bottom: 4px;
+}
+.harvard-text p { font-size: 13px; color: rgba(255,255,255,.6); line-height: 1.5; }
+.harvard-text p strong { color: var(--cr); }
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div>
+    <div class="nav-brand">Camila | Chica Apps</div>
+    <div class="nav-handle">@chica_apps</div>
+  </div>
+  <a href="#contacto" class="nav-cta">Proponer canje ✉️</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">Media Kit · Colaboraciones con Alojamientos</div>
+    <h1>Nómada digital.<br><em>Destino: Harvard.</em></h1>
+    <p class="hero-sub">
+      Soy <strong>Camila Chaves</strong>, ingeniera en software y creadora de contenido sobre
+      tecnología y vida remota. Recibo a mis seguidores en cada destino que visito —
+      <strong>y ahora viajo hacia Harvard</strong>, donde fui admitida para continuar mis estudios.
+    </p>
+    <div class="hero-pills">
+      <span class="pill pill-lav">💻 Nómada digital</span>
+      <span class="pill pill-cr">🎓 Harvard 2026</span>
+      <span class="pill pill-ro">✈️ Trabajo remoto por el mundo</span>
+      <span class="pill pill-lav">📱 @chica_apps</span>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat">
+        <div class="hstat-num">92<span>.7K</span></div>
+        <div class="hstat-label">Visualizaciones<br>últimos 30 días</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-num">2<span>.7K</span></div>
+        <div class="hstat-label">Interacciones<br>últimos 30 días</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-num">37<span>.3%</span></div>
+        <div class="hstat-label">Alcance a<br>no-seguidores</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-num">186</div>
+        <div class="hstat-label">Comentarios en<br>Reels (30 días)</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-num">323</div>
+        <div class="hstat-label">Compartidos<br>últimos 30 días</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-num">213</div>
+        <div class="hstat-label">Guardados<br>últimos 30 días</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUDIENCIA -->
+<section class="section" id="audiencia">
+  <div class="section-inner">
+    <div class="slabel">01 · Audiencia</div>
+    <div class="stitle">Personas que <em>sí</em> se hospedan</div>
+
+    <div class="highlight-box">
+      Mi comunidad está formada por <strong>profesionales remotos, estudiantes de tecnología y nómadas digitales</strong>
+      que toman decisiones de dónde trabajar y hospedarse basándose en recomendaciones reales.
+      No son turistas casuales: son personas que <strong>planifican estadías, valoran la experiencia y comparten lo que viven.</strong>
+    </div>
+
+    <div class="audience-grid">
+      <div class="aud-card dark">
+        <div class="aud-title">Principales países</div>
+        <div class="aud-item">
+          <div class="aud-row"><span class="aud-country">🇦🇷 Argentina</span><span class="aud-pct">80.6%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:80.6%"></div></div>
+        </div>
+        <div class="aud-item">
+          <div class="aud-row"><span class="aud-country">🇪🇸 España</span><span class="aud-pct">4.6%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:4.6%"></div></div>
+        </div>
+        <div class="aud-item">
+          <div class="aud-row"><span class="aud-country">🇨🇱 Chile</span><span class="aud-pct">2.5%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:2.5%"></div></div>
+        </div>
+        <div class="aud-item">
+          <div class="aud-row"><span class="aud-country">🇺🇾 Uruguay</span><span class="aud-pct">2.1%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:2.1%"></div></div>
+        </div>
+      </div>
+
+      <div class="aud-card dark">
+        <div class="aud-title">Demografía</div>
+        <div class="gender-row">
+          <div class="gender-item">
+            <div class="gender-num">58<span style="font-size:18px;color:rgba(216,180,248,.6);">%</span></div>
+            <div class="gender-label">Mujeres</div>
+          </div>
+          <div class="gender-item">
+            <div class="gender-num">42<span style="font-size:18px;color:rgba(216,180,248,.6);">%</span></div>
+            <div class="gender-label">Hombres</div>
+          </div>
+        </div>
+        <div class="insight-grid" style="margin-top:20px;">
+          <div class="insight-card">
+            <div class="insight-num">83%</div>
+            <div class="insight-label">Interacciones desde Reels</div>
+          </div>
+          <div class="insight-card">
+            <div class="insight-num">1.5K</div>
+            <div class="insight-label">Visitas al perfil (30 días)</div>
+          </div>
+          <div class="insight-card">
+            <div class="insight-num">+68%</div>
+            <div class="insight-label">Clics en enlace externo</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="dv">
+
+    <div class="slabel">¿Por qué mi audiencia le importa a tu hotel?</div>
+    <div class="why-grid" style="margin-top:16px;">
+      <div class="why-card">
+        <div class="why-icon">💼</div>
+        <div class="why-title">Trabajan en remoto</div>
+        <div class="why-text">Buscan destinos con buena conectividad y lugares donde poder quedarse varios días o semanas.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🔄</div>
+        <div class="why-title">Vuelven y recomiendan</div>
+        <div class="why-text">Los nómadas digitales repiten destinos y generan recomendaciones boca a boca de alto valor.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">💬</div>
+        <div class="why-title">Comunidad activa</div>
+        <div class="why-text">186 comentarios y 323 compartidos en 30 días. Esta audiencia no solo consume: responde, pregunta y actúa.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">📍</div>
+        <div class="why-title">Toman decisiones de hospedaje</div>
+        <div class="why-text">A diferencia de la audiencia de lifestyle general, mi comunidad está en modo "busco dónde quedarme".</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🎓</div>
+        <div class="why-title">El viaje a Harvard</div>
+        <div class="why-text">Mi próxima etapa genera contenido aspiracional de alto alcance: un viaje internacional con destino claro y relevante.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">📱</div>
+        <div class="why-title">Confían en mí</div>
+        <div class="why-text">Recomiendo apps, herramientas y lugares desde la experiencia real. Mi audiencia lo sabe y lo busca.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROPUESTA DE CANJE -->
+<section class="section canje-section" id="canje">
+  <div class="section-inner">
+    <div class="slabel">02 · Propuesta</div>
+    <div class="stitle">Opciones de <em style="color:var(--lav);">canje</em></div>
+
+    <div class="harvard-banner">
+      <div class="harvard-emoji">🎓</div>
+      <div class="harvard-text">
+        <h3>A cambio de alojamiento por 2 noches para 2 personas, podés elegir alguna de las siguientes opciones:</h3>
+        <p>El contenido generado tiene un <strong>alcance promedio de 92.7K visualizaciones mensuales</strong> y una tasa de engagement que supera el promedio del sector. Todas las piezas de contenido se coordinan previamente entre ambas partes.</p>
+      </div>
+    </div>
+
+    <div class="canje-grid">
+      <div class="canje-card">
+        <div class="canje-head a">
+          <div class="canje-letter">A</div>
+          <div class="canje-badge">Contenido UGC</div>
+        </div>
+        <div class="canje-body">
+          <div class="canje-title">Videos + Historias</div>
+          <ul class="canje-list">
+            <li>3 videos UGC profesionales del alojamiento</li>
+            <li>Historias diarias durante la estadía</li>
+            <li>Mención de ubicación y etiqueta en cada publicación</li>
+            <li>Guión y enfoque acordado previamente</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="canje-card">
+        <div class="canje-head b">
+          <div class="canje-letter">B</div>
+          <div class="canje-badge">Desarrollo Web</div>
+        </div>
+        <div class="canje-body">
+          <div class="canje-title">Página o App web</div>
+          <ul class="canje-list">
+            <li>Landing page o micro-app personalizada</li>
+            <li>Realizada por Designer + Ingeniera en Software</li>
+            <li>Diseño a medida con identidad del alojamiento</li>
+            <li>Entrega con acceso completo al código</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="canje-card">
+        <div class="canje-head c">
+          <div class="canje-letter">C</div>
+          <div class="canje-badge">Combinación</div>
+        </div>
+        <div class="canje-body">
+          <div class="canje-title">Videos + Desarrollo</div>
+          <ul class="canje-list">
+            <li>Combinación de opciones A y B</li>
+            <li>Contenido UGC + entregable web</li>
+            <li>Ideal para alojamientos que quieren presencia digital completa</li>
+            <li>Alcance orgánico + herramienta propia</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="canje-note">
+      <strong>Coordinación entre ambas partes:</strong> El contenido no es improvisado.
+      Antes de la estadía acordamos juntos el guión, las locaciones a mostrar, el estilo del video,
+      los hashtags y los tiempos de publicación. El objetivo es que el resultado sea genuino,
+      útil para tu negocio y coherente con mi línea de contenido. Todas las piezas de contenido se coordinan previamente entre ambas partes.
+    </div>
+
+    <hr class="dv" style="border-color:rgba(216,180,248,.08);">
+
+    <!-- PROCESO -->
+    <div class="slabel" style="color:var(--vs);">¿Cómo funciona?</div>
+    <div style="margin-top:16px;margin-bottom:0;">
+      <div class="proceso-steps">
+        <div class="proceso-step">
+          <div class="paso-num">1</div>
+          <div class="paso-title">Me escribís</div>
+          <div class="paso-text">Me contás sobre tu alojamiento y qué opción te interesa.</div>
+        </div>
+        <div class="proceso-step">
+          <div class="paso-num">2</div>
+          <div class="paso-title">Coordinamos</div>
+          <div class="paso-text">Definimos fechas, guión, entregables y expectativas.</div>
+        </div>
+        <div class="proceso-step">
+          <div class="paso-num">3</div>
+          <div class="paso-title">Me hospedo</div>
+          <div class="paso-text">Genero el contenido durante la estadía de forma orgánica y natural.</div>
+        </div>
+        <div class="proceso-step">
+          <div class="paso-num">4</div>
+          <div class="paso-title">Publico</div>
+          <div class="paso-text">Publicamos en los tiempos acordados y te comparto las métricas.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFICIOS -->
+<section class="section" id="beneficios">
+  <div class="section-inner">
+    <div class="slabel">03 · Beneficios extra</div>
+    <div class="stitle">Más que <em>un video</em></div>
+    <div class="beneficios-grid">
+      <div class="ben-card a">
+        <div class="ben-icon">🗺️</div>
+        <div class="ben-title">Mapa de nómadas</div>
+        <div class="ben-text">
+          Tu alojamiento queda incluido en mi <strong>mapa personal de recomendaciones</strong>
+          para nómadas digitales que viajan por el mundo.
+          Una referencia que crece y perdura más allá de los videos.
+        </div>
+      </div>
+      <div class="ben-card b">
+        <div class="ben-icon">📊</div>
+        <div class="ben-title">Código de seguimiento</div>
+        <div class="ben-text">
+          Te genero un <strong>código de tracking personalizado</strong> para que puedas
+          consultar en tiempo real las métricas de cada video: visualizaciones, clics en enlace,
+          interacciones y más.
+        </div>
+      </div>
+      <div class="ben-card c">
+        <div class="ben-icon">⚡</div>
+        <div class="ben-title">Auditoría gratuita</div>
+        <div class="ben-text">
+          Sesión de <strong>30 minutos con un Designer Engineer y una Software Engineer</strong>
+          para revisar tus herramientas digitales internas o de cara al cliente y sugerirte mejoras concretas.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEOS REFERENCIAS -->
+<section class="section videos-section" id="videos">
+  <div class="section-inner">
+    <div class="slabel">04 · Contenido de referencia</div>
+    <div class="stitle">Videos de viajes<br><em>y hospedajes</em></div>
+    <p class="videos-intro">
+      Estos son mis videos relacionados a viajes, hoteles y experiencias de hospedaje,
+      ordenados por impacto y viralidad. Todo el contenido fue creado desde la experiencia genuina,
+      sin libreto forzado.
+    </p>
+
+    <div class="videos-grid">
+
+      <div class="video-item">
+        <div class="video-rank">
+          <div class="rank-badge rank-1">#1</div>
+          <span class="rank-label">Mayor alcance</span>
+        </div>
+        <div class="video-embed-wrap">
+          <blockquote class="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/reel/C_IyMraxx85/"
+            data-instgrm-version="14"
+            style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:unset;padding:0;width:100%;">
+          </blockquote>
+        </div>
+      </div>
+
+      <div class="video-item">
+        <div class="video-rank">
+          <div class="rank-badge rank-2">#2</div>
+          <span class="rank-label">Alto alcance</span>
+        </div>
+        <div class="video-embed-wrap">
+          <blockquote class="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/reel/DXIaLXRjcWP/"
+            data-instgrm-version="14"
+            style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:unset;padding:0;width:100%;">
+          </blockquote>
+        </div>
+      </div>
+
+      <div class="video-item">
+        <div class="video-rank">
+          <div class="rank-badge rank-3">#3</div>
+          <span class="rank-label">Viral orgánico</span>
+        </div>
+        <div class="video-embed-wrap">
+          <blockquote class="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/reel/DPjxG6ojmyA/"
+            data-instgrm-version="14"
+            style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:unset;padding:0;width:100%;">
+          </blockquote>
+        </div>
+      </div>
+
+      <div class="video-item">
+        <div class="video-rank">
+          <div class="rank-badge rank-n">#4</div>
+          <span class="rank-label">Viajes · tecnología</span>
+        </div>
+        <div class="video-embed-wrap">
+          <blockquote class="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/reel/DGjlhuLxNc1/"
+            data-instgrm-version="14"
+            style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:unset;padding:0;width:100%;">
+          </blockquote>
+        </div>
+      </div>
+
+      <div class="video-item">
+        <div class="video-rank">
+          <div class="rank-badge rank-n">#5</div>
+          <span class="rank-label">Experiencia de viaje</span>
+        </div>
+        <div class="video-embed-wrap">
+          <blockquote class="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/reel/DGMXk4SxHIN/"
+            data-instgrm-version="14"
+            style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:unset;padding:0;width:100%;">
+          </blockquote>
+        </div>
+      </div>
+
+      <div class="video-item">
+        <div class="video-rank">
+          <div class="rank-badge rank-n">#6</div>
+          <span class="rank-label">Destino remoto</span>
+        </div>
+        <div class="video-embed-wrap">
+          <blockquote class="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/reel/DFxvBWNRZCv/"
+            data-instgrm-version="14"
+            style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:unset;padding:0;width:100%;">
+          </blockquote>
+        </div>
+      </div>
+
+      <div class="video-item">
+        <div class="video-rank">
+          <div class="rank-badge rank-n">#7</div>
+          <span class="rank-label">Nómada en movimiento</span>
+        </div>
+        <div class="video-embed-wrap">
+          <blockquote class="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/reel/DFtjDAeR9Em/"
+            data-instgrm-version="14"
+            style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:unset;padding:0;width:100%;">
+          </blockquote>
+        </div>
+      </div>
+
+      <div class="video-item">
+        <div class="video-rank">
+          <div class="rank-badge rank-n">#8</div>
+          <span class="rank-label">Viaje + tecnología</span>
+        </div>
+        <div class="video-embed-wrap">
+          <blockquote class="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/reel/DARtpZsPSSa/"
+            data-instgrm-version="14"
+            style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:unset;padding:0;width:100%;">
+          </blockquote>
+        </div>
+      </div>
+
+      <div class="video-item">
+        <div class="video-rank">
+          <div class="rank-badge rank-n">#9</div>
+          <span class="rank-label">Lifestyle nómada</span>
+        </div>
+        <div class="video-embed-wrap">
+          <blockquote class="instagram-media"
+            data-instgrm-permalink="https://www.instagram.com/reel/CtaLXHAAoD7/"
+            data-instgrm-version="14"
+            style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:unset;padding:0;width:100%;">
+          </blockquote>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contacto">
+  <div class="section-inner">
+    <div class="cta-tag">✉️ Proponer colaboración</div>
+    <div class="cta-title">¿Tu hotel en el<br><em>mapa nómada?</em></div>
+    <p class="cta-text">
+      Estoy buscando alojamientos que quieran llegar a una audiencia de
+      <strong>profesionales remotos que eligen dónde hospedarse</strong> basándose en recomendaciones genuinas.
+      ¿Hablamos?
+    </p>
+    <div class="cta-buttons">
+      <a href="mailto:camichavesthg@gmail.com?subject=Propuesta%20de%20canje%20-%20%5BNombre%20del%20hotel%5D" class="btn-primary">
+        ✉️ Escribirme por mail
+      </a>
+      <a href="https://www.instagram.com/chica_apps/" target="_blank" rel="noopener" class="btn-secondary">
+        📲 Ver mi Instagram
+      </a>
+    </div>
+
+    <div class="cta-divider">
+      <div class="cta-stat-item">
+        <div class="cta-stat-num">92<span>.7K</span></div>
+        <div class="cta-stat-label">Views / mes</div>
+      </div>
+      <div class="cta-stat-item">
+        <div class="cta-stat-num">186</div>
+        <div class="cta-stat-label">Comentarios / mes</div>
+      </div>
+      <div class="cta-stat-item">
+        <div class="cta-stat-num">323</div>
+        <div class="cta-stat-label">Compartidos / mes</div>
+      </div>
+      <div class="cta-stat-item">
+        <div class="cta-stat-num">37<span>%</span></div>
+        <div class="cta-stat-label">Alcance nuevo</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-brand">Camila | Chica Apps</div>
+  <div class="footer-text">Media Kit · Junio 2026</div>
+  <a href="https://www.instagram.com/chica_apps/" target="_blank" rel="noopener" class="footer-ig">@chica_apps</a>
+</footer>
+
+<!-- Instagram embed script -->
+<script async defer src="https://www.instagram.com/embed.js"></script>
+<script>
+  // Re-process embeds once the script loads (in case of SPA or dynamic load)
+  window.addEventListener('load', function() {
+    if (window.instgrm) window.instgrm.Embeds.process();
+  });
+</script>
+
+</body>
+</html>
