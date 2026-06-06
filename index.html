@@ -38,6 +38,26 @@ body { font-family: var(--font-b); background: var(--pg); color: var(--vd); -web
 }
 .nav-brand { font-family: var(--font-d); font-weight: 800; font-size: 16px; color: var(--lav); letter-spacing: -.01em; }
 .nav-handle { font-size: 12px; color: rgba(216,180,248,.55); margin-top: 1px; }
+.nav-right { display: flex; align-items: center; gap: 10px; }
+
+/* ── LANG TOGGLE ── */
+.lang-toggle {
+  display: flex; align-items: center;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(216,180,248,.2);
+  border-radius: 99px; padding: 3px; gap: 2px;
+}
+.lang-btn {
+  padding: 5px 11px; border-radius: 99px;
+  font-family: var(--font-b); font-size: 12px; font-weight: 700;
+  cursor: pointer; border: none; background: transparent;
+  color: rgba(255,255,255,.45); transition: all .2s; letter-spacing: .04em;
+}
+.lang-btn.active {
+  background: var(--lav); color: var(--vd);
+}
+.lang-btn:hover:not(.active) { color: rgba(255,255,255,.8); }
+
 .nav-cta {
   padding: 8px 18px; border-radius: 99px;
   background: var(--lav); color: var(--vd);
@@ -197,12 +217,6 @@ body { font-family: var(--font-b); background: var(--pg); color: var(--vd); -web
 .canje-section .stitle { color: #fff; }
 .canje-section .slabel { color: var(--vs); }
 
-.canje-intro {
-  font-size: clamp(15px,2.5vw,17px); color: rgba(255,255,255,.65);
-  line-height: 1.7; margin-bottom: 36px; max-width: 620px;
-}
-.canje-intro strong { color: var(--cr); }
-
 .canje-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
 @media(min-width:640px){ .canje-grid { grid-template-columns: repeat(3,1fr); } }
 
@@ -251,6 +265,14 @@ body { font-family: var(--font-b); background: var(--pg); color: var(--vd); -web
 .canje-card:nth-child(1) .canje-list li::before { background: var(--lav); }
 .canje-card:nth-child(2) .canje-list li::before { background: var(--cr); }
 .canje-card:nth-child(3) .canje-list li::before { background: var(--ro); }
+
+/* lang pill inside list item */
+.lang-pill {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 2px 9px; border-radius: 99px; font-size: 11px; font-weight: 600;
+  background: rgba(216,180,248,.18); color: var(--lav);
+  border: 1px solid rgba(216,180,248,.25); white-space: nowrap; flex-shrink: 0;
+}
 
 .canje-note {
   margin-top: 32px; padding: 18px 22px; border-radius: 12px;
@@ -458,6 +480,9 @@ hr.dv { border: none; border-top: 1px solid rgba(93,58,158,.1); margin: clamp(32
 .harvard-text p { font-size: 13px; color: rgba(255,255,255,.6); line-height: 1.5; }
 .harvard-text p strong { color: var(--cr); }
 
+/* ── TRANSITION for lang switch ── */
+[data-i18n] { transition: opacity .15s; }
+.lang-fade { opacity: 0; }
 </style>
 </head>
 <body>
@@ -468,49 +493,55 @@ hr.dv { border: none; border-top: 1px solid rgba(93,58,158,.1); margin: clamp(32
     <div class="nav-brand">Camila | Chica Apps</div>
     <div class="nav-handle">@chica_apps</div>
   </div>
-  <a href="#contacto" class="nav-cta">Proponer canje ✉️</a>
+  <div class="nav-right">
+    <div class="lang-toggle" role="group" aria-label="Language">
+      <button class="lang-btn active" data-lang="es" onclick="setLang('es')">ES</button>
+      <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+    </div>
+    <a href="#contacto" class="nav-cta" data-i18n="nav_cta">Proponer canje ✉️</a>
+  </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-tag">Media Kit · Colaboraciones con Alojamientos</div>
-    <h1>Nómada digital.<br><em>Destino: Harvard.</em></h1>
-    <p class="hero-sub">
+    <div class="hero-tag" data-i18n="hero_tag">Media Kit · Colaboraciones con Alojamientos</div>
+    <h1 data-i18n-html="hero_h1">Nómada digital.<br><em>Destino: Harvard.</em></h1>
+    <p class="hero-sub" data-i18n-html="hero_sub">
       Soy <strong>Camila Chaves</strong>, ingeniera en software y creadora de contenido sobre
       tecnología y vida remota. Recibo a mis seguidores en cada destino que visito —
       <strong>y ahora viajo hacia Harvard</strong>, donde fui admitida para continuar mis estudios.
     </p>
     <div class="hero-pills">
-      <span class="pill pill-lav">💻 Nómada digital</span>
+      <span class="pill pill-lav" data-i18n="pill_nomad">💻 Nómada digital</span>
       <span class="pill pill-cr">🎓 Harvard 2026</span>
-      <span class="pill pill-ro">✈️ Trabajo remoto por el mundo</span>
+      <span class="pill pill-ro" data-i18n="pill_remote">✈️ Trabajo remoto por el mundo</span>
       <span class="pill pill-lav">📱 @chica_apps</span>
     </div>
     <div class="hero-stats">
       <div class="hstat">
         <div class="hstat-num">92<span>.7K</span></div>
-        <div class="hstat-label">Visualizaciones<br>últimos 30 días</div>
+        <div class="hstat-label" data-i18n-html="stat_views">Visualizaciones<br>últimos 30 días</div>
       </div>
       <div class="hstat">
         <div class="hstat-num">2<span>.7K</span></div>
-        <div class="hstat-label">Interacciones<br>últimos 30 días</div>
+        <div class="hstat-label" data-i18n-html="stat_interactions">Interacciones<br>últimos 30 días</div>
       </div>
       <div class="hstat">
         <div class="hstat-num">37<span>.3%</span></div>
-        <div class="hstat-label">Alcance a<br>no-seguidores</div>
+        <div class="hstat-label" data-i18n-html="stat_reach">Alcance a<br>no-seguidores</div>
       </div>
       <div class="hstat">
         <div class="hstat-num">186</div>
-        <div class="hstat-label">Comentarios en<br>Reels (30 días)</div>
+        <div class="hstat-label" data-i18n-html="stat_comments">Comentarios en<br>Reels (30 días)</div>
       </div>
       <div class="hstat">
         <div class="hstat-num">323</div>
-        <div class="hstat-label">Compartidos<br>últimos 30 días</div>
+        <div class="hstat-label" data-i18n-html="stat_shares">Compartidos<br>últimos 30 días</div>
       </div>
       <div class="hstat">
         <div class="hstat-num">213</div>
-        <div class="hstat-label">Guardados<br>últimos 30 días</div>
+        <div class="hstat-label" data-i18n-html="stat_saves">Guardados<br>últimos 30 días</div>
       </div>
     </div>
   </div>
@@ -519,10 +550,10 @@ hr.dv { border: none; border-top: 1px solid rgba(93,58,158,.1); margin: clamp(32
 <!-- AUDIENCIA -->
 <section class="section" id="audiencia">
   <div class="section-inner">
-    <div class="slabel">01 · Audiencia</div>
-    <div class="stitle">Personas que <em>sí</em> se hospedan</div>
+    <div class="slabel" data-i18n="s1_label">01 · Audiencia</div>
+    <div class="stitle" data-i18n-html="s1_title">Personas que <em>sí</em> se hospedan</div>
 
-    <div class="highlight-box">
+    <div class="highlight-box" data-i18n-html="s1_highlight">
       Mi comunidad está formada por <strong>profesionales remotos, estudiantes de tecnología y nómadas digitales</strong>
       que toman decisiones de dónde trabajar y hospedarse basándose en recomendaciones reales.
       No son turistas casuales: son personas que <strong>planifican estadías, valoran la experiencia y comparten lo que viven.</strong>
@@ -530,7 +561,7 @@ hr.dv { border: none; border-top: 1px solid rgba(93,58,158,.1); margin: clamp(32
 
     <div class="audience-grid">
       <div class="aud-card dark">
-        <div class="aud-title">Principales países</div>
+        <div class="aud-title" data-i18n="aud_countries">Principales países</div>
         <div class="aud-item">
           <div class="aud-row"><span class="aud-country">🇦🇷 Argentina</span><span class="aud-pct">80.6%</span></div>
           <div class="bar-track"><div class="bar-fill" style="width:80.6%"></div></div>
@@ -550,29 +581,29 @@ hr.dv { border: none; border-top: 1px solid rgba(93,58,158,.1); margin: clamp(32
       </div>
 
       <div class="aud-card dark">
-        <div class="aud-title">Demografía</div>
+        <div class="aud-title" data-i18n="aud_demo">Demografía</div>
         <div class="gender-row">
           <div class="gender-item">
             <div class="gender-num">58<span style="font-size:18px;color:rgba(216,180,248,.6);">%</span></div>
-            <div class="gender-label">Mujeres</div>
+            <div class="gender-label" data-i18n="aud_women">Mujeres</div>
           </div>
           <div class="gender-item">
             <div class="gender-num">42<span style="font-size:18px;color:rgba(216,180,248,.6);">%</span></div>
-            <div class="gender-label">Hombres</div>
+            <div class="gender-label" data-i18n="aud_men">Hombres</div>
           </div>
         </div>
         <div class="insight-grid" style="margin-top:20px;">
           <div class="insight-card">
             <div class="insight-num">83%</div>
-            <div class="insight-label">Interacciones desde Reels</div>
+            <div class="insight-label" data-i18n="ins_reels">Interacciones desde Reels</div>
           </div>
           <div class="insight-card">
             <div class="insight-num">1.5K</div>
-            <div class="insight-label">Visitas al perfil (30 días)</div>
+            <div class="insight-label" data-i18n="ins_visits">Visitas al perfil (30 días)</div>
           </div>
           <div class="insight-card">
             <div class="insight-num">+68%</div>
-            <div class="insight-label">Clics en enlace externo</div>
+            <div class="insight-label" data-i18n="ins_clicks">Clics en enlace externo</div>
           </div>
         </div>
       </div>
@@ -580,37 +611,37 @@ hr.dv { border: none; border-top: 1px solid rgba(93,58,158,.1); margin: clamp(32
 
     <hr class="dv">
 
-    <div class="slabel">¿Por qué mi audiencia le importa a tu hotel?</div>
+    <div class="slabel" data-i18n="why_label">¿Por qué mi audiencia le importa a tu hotel?</div>
     <div class="why-grid" style="margin-top:16px;">
       <div class="why-card">
         <div class="why-icon">💼</div>
-        <div class="why-title">Trabajan en remoto</div>
-        <div class="why-text">Buscan destinos con buena conectividad y lugares donde poder quedarse varios días o semanas.</div>
+        <div class="why-title" data-i18n="why1_t">Trabajan en remoto</div>
+        <div class="why-text" data-i18n="why1_d">Buscan destinos con buena conectividad y lugares donde poder quedarse varios días o semanas.</div>
       </div>
       <div class="why-card">
         <div class="why-icon">🔄</div>
-        <div class="why-title">Vuelven y recomiendan</div>
-        <div class="why-text">Los nómadas digitales repiten destinos y generan recomendaciones boca a boca de alto valor.</div>
+        <div class="why-title" data-i18n="why2_t">Vuelven y recomiendan</div>
+        <div class="why-text" data-i18n="why2_d">Los nómadas digitales repiten destinos y generan recomendaciones boca a boca de alto valor.</div>
       </div>
       <div class="why-card">
         <div class="why-icon">💬</div>
-        <div class="why-title">Comunidad activa</div>
-        <div class="why-text">186 comentarios y 323 compartidos en 30 días. Esta audiencia no solo consume: responde, pregunta y actúa.</div>
+        <div class="why-title" data-i18n="why3_t">Comunidad activa</div>
+        <div class="why-text" data-i18n="why3_d">186 comentarios y 323 compartidos en 30 días. Esta audiencia no solo consume: responde, pregunta y actúa.</div>
       </div>
       <div class="why-card">
         <div class="why-icon">📍</div>
-        <div class="why-title">Toman decisiones de hospedaje</div>
-        <div class="why-text">A diferencia de la audiencia de lifestyle general, mi comunidad está en modo "busco dónde quedarme".</div>
+        <div class="why-title" data-i18n="why4_t">Toman decisiones de hospedaje</div>
+        <div class="why-text" data-i18n="why4_d">A diferencia de la audiencia de lifestyle general, mi comunidad está en modo "busco dónde quedarme".</div>
       </div>
       <div class="why-card">
         <div class="why-icon">🎓</div>
-        <div class="why-title">El viaje a Harvard</div>
-        <div class="why-text">Mi próxima etapa genera contenido aspiracional de alto alcance: un viaje internacional con destino claro y relevante.</div>
+        <div class="why-title" data-i18n="why5_t">El viaje a Harvard</div>
+        <div class="why-text" data-i18n="why5_d">Mi próxima etapa genera contenido aspiracional de alto alcance: un viaje internacional con destino claro y relevante.</div>
       </div>
       <div class="why-card">
         <div class="why-icon">📱</div>
-        <div class="why-title">Confían en mí</div>
-        <div class="why-text">Recomiendo apps, herramientas y lugares desde la experiencia real. Mi audiencia lo sabe y lo busca.</div>
+        <div class="why-title" data-i18n="why6_t">Confían en mí</div>
+        <div class="why-text" data-i18n="why6_d">Recomiendo apps, herramientas y lugares desde la experiencia real. Mi audiencia lo sabe y lo busca.</div>
       </div>
     </div>
   </div>
@@ -619,68 +650,75 @@ hr.dv { border: none; border-top: 1px solid rgba(93,58,158,.1); margin: clamp(32
 <!-- PROPUESTA DE CANJE -->
 <section class="section canje-section" id="canje">
   <div class="section-inner">
-    <div class="slabel">02 · Propuesta</div>
-    <div class="stitle">Opciones de <em style="color:var(--lav);">canje</em></div>
+    <div class="slabel" data-i18n="s2_label">02 · Propuesta</div>
+    <div class="stitle" data-i18n-html="s2_title">Opciones de <em style="color:var(--lav);">canje</em></div>
 
     <div class="harvard-banner">
       <div class="harvard-emoji">🎓</div>
       <div class="harvard-text">
-        <h3>A cambio de alojamiento por 2 noches para 2 personas, podés elegir alguna de las siguientes opciones:</h3>
-        <p>El contenido generado tiene un <strong>alcance promedio de 92.7K visualizaciones mensuales</strong> y una tasa de engagement que supera el promedio del sector. Todas las piezas de contenido se coordinan previamente entre ambas partes.</p>
+        <h3 data-i18n="banner_h3">A cambio de alojamiento por 2 noches para 2 personas, podés elegir alguna de las siguientes opciones:</h3>
+        <p data-i18n-html="banner_p">El contenido generado tiene un <strong>alcance promedio de 92.7K visualizaciones mensuales</strong> y una tasa de engagement que supera el promedio del sector. Todas las piezas de contenido se coordinan previamente entre ambas partes.</p>
       </div>
     </div>
 
     <div class="canje-grid">
+      <!-- OPCIÓN A -->
       <div class="canje-card">
         <div class="canje-head a">
           <div class="canje-letter">A</div>
-          <div class="canje-badge">Contenido UGC</div>
+          <div class="canje-badge" data-i18n="ca_badge">Contenido UGC</div>
         </div>
         <div class="canje-body">
-          <div class="canje-title">Videos + Historias</div>
+          <div class="canje-title" data-i18n="ca_title">Videos + Historias</div>
           <ul class="canje-list">
-            <li>3 videos UGC profesionales del alojamiento</li>
-            <li>Historias diarias durante la estadía</li>
-            <li>Mención de ubicación y etiqueta en cada publicación</li>
-            <li>Guión y enfoque acordado previamente</li>
+            <li data-i18n="ca_li1">3 videos UGC profesionales del alojamiento</li>
+            <li data-i18n="ca_li2">Historias diarias durante la estadía</li>
+            <li data-i18n="ca_li3">Mención de ubicación y etiqueta en cada publicación</li>
+            <li data-i18n="ca_li4">Guión y enfoque acordado previamente</li>
+            <li>
+              <span data-i18n="ca_li5">Videos disponibles en español o inglés</span>
+              &nbsp;<span class="lang-pill">🌐 ES / EN</span>
+            </li>
           </ul>
         </div>
       </div>
 
+      <!-- OPCIÓN B -->
       <div class="canje-card">
         <div class="canje-head b">
           <div class="canje-letter">B</div>
-          <div class="canje-badge">Desarrollo Web</div>
+          <div class="canje-badge" data-i18n="cb_badge">Desarrollo Web</div>
         </div>
         <div class="canje-body">
-          <div class="canje-title">Página o App web</div>
+          <div class="canje-title" data-i18n="cb_title">Página o App web</div>
           <ul class="canje-list">
-            <li>Landing page o micro-app personalizada</li>
-            <li>Realizada por Designer + Ingeniera en Software</li>
-            <li>Diseño a medida con identidad del alojamiento</li>
-            <li>Entrega con acceso completo al código</li>
+            <li data-i18n="cb_li1">Landing page o micro-app personalizada</li>
+            <li data-i18n="cb_li2">Realizada por Designer + Ingeniera en Software</li>
+            <li data-i18n="cb_li3">Diseño a medida con identidad del alojamiento</li>
+            <li data-i18n="cb_li4">Entrega con acceso completo al código</li>
           </ul>
         </div>
       </div>
 
+      <!-- OPCIÓN C -->
       <div class="canje-card">
         <div class="canje-head c">
           <div class="canje-letter">C</div>
-          <div class="canje-badge">Combinación</div>
+          <div class="canje-badge" data-i18n="cc_badge">Combinación</div>
         </div>
         <div class="canje-body">
-          <div class="canje-title">Videos + Desarrollo</div>
+          <div class="canje-title" data-i18n="cc_title">Videos + Desarrollo</div>
           <ul class="canje-list">
-            <li>Combinación de opciones A y B</li>
-            <li>Contenido UGC + entregable web</li>
-            <li>Ideal para alojamientos que quieren presencia digital completa</li>
-            <li>Alcance orgánico + herramienta propia</li>
+            <li data-i18n="cc_li1">Combinación de opciones A y B</li>
+            <li data-i18n="cc_li2">Contenido UGC + entregable web</li>
+            <li data-i18n="cc_li3">Ideal para alojamientos que quieren presencia digital completa</li>
+            <li data-i18n="cc_li4">Alcance orgánico + herramienta propia</li>
           </ul>
         </div>
       </div>
     </div>
 
-    <div class="canje-note">
+    <div class="canje-note" data-i18n-html="canje_note">
       <strong>Coordinación entre ambas partes:</strong> El contenido no es improvisado.
       Antes de la estadía acordamos juntos el guión, las locaciones a mostrar, el estilo del video,
       los hashtags y los tiempos de publicación. El objetivo es que el resultado sea genuino,
@@ -690,28 +728,28 @@ hr.dv { border: none; border-top: 1px solid rgba(93,58,158,.1); margin: clamp(32
     <hr class="dv" style="border-color:rgba(216,180,248,.08);">
 
     <!-- PROCESO -->
-    <div class="slabel" style="color:var(--vs);">¿Cómo funciona?</div>
+    <div class="slabel" style="color:var(--vs);" data-i18n="proceso_label">¿Cómo funciona?</div>
     <div style="margin-top:16px;margin-bottom:0;">
       <div class="proceso-steps">
         <div class="proceso-step">
           <div class="paso-num">1</div>
-          <div class="paso-title">Me escribís</div>
-          <div class="paso-text">Me contás sobre tu alojamiento y qué opción te interesa.</div>
+          <div class="paso-title" data-i18n="p1_t">Me escribís</div>
+          <div class="paso-text" data-i18n="p1_d">Me contás sobre tu alojamiento y qué opción te interesa.</div>
         </div>
         <div class="proceso-step">
           <div class="paso-num">2</div>
-          <div class="paso-title">Coordinamos</div>
-          <div class="paso-text">Definimos fechas, guión, entregables y expectativas.</div>
+          <div class="paso-title" data-i18n="p2_t">Coordinamos</div>
+          <div class="paso-text" data-i18n="p2_d">Definimos fechas, guión, entregables y expectativas.</div>
         </div>
         <div class="proceso-step">
           <div class="paso-num">3</div>
-          <div class="paso-title">Me hospedo</div>
-          <div class="paso-text">Genero el contenido durante la estadía de forma orgánica y natural.</div>
+          <div class="paso-title" data-i18n="p3_t">Me hospedo</div>
+          <div class="paso-text" data-i18n="p3_d">Genero el contenido durante la estadía de forma orgánica y natural.</div>
         </div>
         <div class="proceso-step">
           <div class="paso-num">4</div>
-          <div class="paso-title">Publico</div>
-          <div class="paso-text">Publicamos en los tiempos acordados y te comparto las métricas.</div>
+          <div class="paso-title" data-i18n="p4_t">Publico</div>
+          <div class="paso-text" data-i18n="p4_d">Publicamos en los tiempos acordados y te comparto las métricas.</div>
         </div>
       </div>
     </div>
@@ -721,13 +759,13 @@ hr.dv { border: none; border-top: 1px solid rgba(93,58,158,.1); margin: clamp(32
 <!-- BENEFICIOS -->
 <section class="section" id="beneficios">
   <div class="section-inner">
-    <div class="slabel">03 · Beneficios extra</div>
-    <div class="stitle">Más que <em>un video</em></div>
+    <div class="slabel" data-i18n="s3_label">03 · Beneficios extra</div>
+    <div class="stitle" data-i18n-html="s3_title">Más que <em>un video</em></div>
     <div class="beneficios-grid">
       <div class="ben-card a">
         <div class="ben-icon">🗺️</div>
-        <div class="ben-title">Mapa de nómadas</div>
-        <div class="ben-text">
+        <div class="ben-title" data-i18n="ben1_t">Mapa de nómadas</div>
+        <div class="ben-text" data-i18n-html="ben1_d">
           Tu alojamiento queda incluido en mi <strong>mapa personal de recomendaciones</strong>
           para nómadas digitales que viajan por el mundo.
           Una referencia que crece y perdura más allá de los videos.
@@ -735,8 +773,8 @@ hr.dv { border: none; border-top: 1px solid rgba(93,58,158,.1); margin: clamp(32
       </div>
       <div class="ben-card b">
         <div class="ben-icon">📊</div>
-        <div class="ben-title">Código de seguimiento</div>
-        <div class="ben-text">
+        <div class="ben-title" data-i18n="ben2_t">Código de seguimiento</div>
+        <div class="ben-text" data-i18n-html="ben2_d">
           Te genero un <strong>código de tracking personalizado</strong> para que puedas
           consultar en tiempo real las métricas de cada video: visualizaciones, clics en enlace,
           interacciones y más.
@@ -744,8 +782,8 @@ hr.dv { border: none; border-top: 1px solid rgba(93,58,158,.1); margin: clamp(32
       </div>
       <div class="ben-card c">
         <div class="ben-icon">⚡</div>
-        <div class="ben-title">Auditoría gratuita</div>
-        <div class="ben-text">
+        <div class="ben-title" data-i18n="ben3_t">Auditoría gratuita</div>
+        <div class="ben-text" data-i18n-html="ben3_d">
           Sesión de <strong>30 minutos con un Designer Engineer y una Software Engineer</strong>
           para revisar tus herramientas digitales internas o de cara al cliente y sugerirte mejoras concretas.
         </div>
@@ -757,142 +795,69 @@ hr.dv { border: none; border-top: 1px solid rgba(93,58,158,.1); margin: clamp(32
 <!-- VIDEOS REFERENCIAS -->
 <section class="section videos-section" id="videos">
   <div class="section-inner">
-    <div class="slabel">04 · Contenido de referencia</div>
-    <div class="stitle">Videos de viajes<br><em>y hospedajes</em></div>
-    <p class="videos-intro">
+    <div class="slabel" data-i18n="s4_label">04 · Contenido de referencia</div>
+    <div class="stitle" data-i18n-html="s4_title">Videos de viajes<br><em>y hospedajes</em></div>
+    <p class="videos-intro" data-i18n="s4_intro">
       Estos son mis videos relacionados a viajes, hoteles y experiencias de hospedaje,
       ordenados por impacto y viralidad. Todo el contenido fue creado desde la experiencia genuina,
       sin libreto forzado.
     </p>
 
     <div class="videos-grid">
-
       <div class="video-item">
-        <div class="video-rank">
-          <div class="rank-badge rank-1">#1</div>
-          <span class="rank-label">Mayor alcance</span>
-        </div>
+        <div class="video-rank"><div class="rank-badge rank-1">#1</div><span class="rank-label" data-i18n="v1_label">Mayor alcance</span></div>
         <div class="video-embed-wrap">
-          <blockquote class="instagram-media"
-            data-instgrm-permalink="https://www.instagram.com/reel/C_IyMraxx85/"
-            data-instgrm-version="14"
-            style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:unset;padding:0;width:100%;">
-          </blockquote>
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/C_IyMraxx85/" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:unset;padding:0;width:100%;"></blockquote>
         </div>
       </div>
-
       <div class="video-item">
-        <div class="video-rank">
-          <div class="rank-badge rank-2">#2</div>
-          <span class="rank-label">Alto alcance</span>
-        </div>
+        <div class="video-rank"><div class="rank-badge rank-2">#2</div><span class="rank-label" data-i18n="v2_label">Alto alcance</span></div>
         <div class="video-embed-wrap">
-          <blockquote class="instagram-media"
-            data-instgrm-permalink="https://www.instagram.com/reel/DXIaLXRjcWP/"
-            data-instgrm-version="14"
-            style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:unset;padding:0;width:100%;">
-          </blockquote>
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DXIaLXRjcWP/" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:unset;padding:0;width:100%;"></blockquote>
         </div>
       </div>
-
       <div class="video-item">
-        <div class="video-rank">
-          <div class="rank-badge rank-3">#3</div>
-          <span class="rank-label">Viral orgánico</span>
-        </div>
+        <div class="video-rank"><div class="rank-badge rank-3">#3</div><span class="rank-label" data-i18n="v3_label">Viral orgánico</span></div>
         <div class="video-embed-wrap">
-          <blockquote class="instagram-media"
-            data-instgrm-permalink="https://www.instagram.com/reel/DPjxG6ojmyA/"
-            data-instgrm-version="14"
-            style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:unset;padding:0;width:100%;">
-          </blockquote>
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DPjxG6ojmyA/" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:unset;padding:0;width:100%;"></blockquote>
         </div>
       </div>
-
       <div class="video-item">
-        <div class="video-rank">
-          <div class="rank-badge rank-n">#4</div>
-          <span class="rank-label">Viajes · tecnología</span>
-        </div>
+        <div class="video-rank"><div class="rank-badge rank-n">#4</div><span class="rank-label" data-i18n="v4_label">Viajes · tecnología</span></div>
         <div class="video-embed-wrap">
-          <blockquote class="instagram-media"
-            data-instgrm-permalink="https://www.instagram.com/reel/DGjlhuLxNc1/"
-            data-instgrm-version="14"
-            style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:unset;padding:0;width:100%;">
-          </blockquote>
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DGjlhuLxNc1/" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:unset;padding:0;width:100%;"></blockquote>
         </div>
       </div>
-
       <div class="video-item">
-        <div class="video-rank">
-          <div class="rank-badge rank-n">#5</div>
-          <span class="rank-label">Experiencia de viaje</span>
-        </div>
+        <div class="video-rank"><div class="rank-badge rank-n">#5</div><span class="rank-label" data-i18n="v5_label">Experiencia de viaje</span></div>
         <div class="video-embed-wrap">
-          <blockquote class="instagram-media"
-            data-instgrm-permalink="https://www.instagram.com/reel/DGMXk4SxHIN/"
-            data-instgrm-version="14"
-            style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:unset;padding:0;width:100%;">
-          </blockquote>
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DGMXk4SxHIN/" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:unset;padding:0;width:100%;"></blockquote>
         </div>
       </div>
-
       <div class="video-item">
-        <div class="video-rank">
-          <div class="rank-badge rank-n">#6</div>
-          <span class="rank-label">Destino remoto</span>
-        </div>
+        <div class="video-rank"><div class="rank-badge rank-n">#6</div><span class="rank-label" data-i18n="v6_label">Destino remoto</span></div>
         <div class="video-embed-wrap">
-          <blockquote class="instagram-media"
-            data-instgrm-permalink="https://www.instagram.com/reel/DFxvBWNRZCv/"
-            data-instgrm-version="14"
-            style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:unset;padding:0;width:100%;">
-          </blockquote>
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DFxvBWNRZCv/" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:unset;padding:0;width:100%;"></blockquote>
         </div>
       </div>
-
       <div class="video-item">
-        <div class="video-rank">
-          <div class="rank-badge rank-n">#7</div>
-          <span class="rank-label">Nómada en movimiento</span>
-        </div>
+        <div class="video-rank"><div class="rank-badge rank-n">#7</div><span class="rank-label" data-i18n="v7_label">Nómada en movimiento</span></div>
         <div class="video-embed-wrap">
-          <blockquote class="instagram-media"
-            data-instgrm-permalink="https://www.instagram.com/reel/DFtjDAeR9Em/"
-            data-instgrm-version="14"
-            style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:unset;padding:0;width:100%;">
-          </blockquote>
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DFtjDAeR9Em/" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:unset;padding:0;width:100%;"></blockquote>
         </div>
       </div>
-
       <div class="video-item">
-        <div class="video-rank">
-          <div class="rank-badge rank-n">#8</div>
-          <span class="rank-label">Viaje + tecnología</span>
-        </div>
+        <div class="video-rank"><div class="rank-badge rank-n">#8</div><span class="rank-label" data-i18n="v8_label">Viaje + tecnología</span></div>
         <div class="video-embed-wrap">
-          <blockquote class="instagram-media"
-            data-instgrm-permalink="https://www.instagram.com/reel/DARtpZsPSSa/"
-            data-instgrm-version="14"
-            style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:unset;padding:0;width:100%;">
-          </blockquote>
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DARtpZsPSSa/" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:unset;padding:0;width:100%;"></blockquote>
         </div>
       </div>
-
       <div class="video-item">
-        <div class="video-rank">
-          <div class="rank-badge rank-n">#9</div>
-          <span class="rank-label">Lifestyle nómada</span>
-        </div>
+        <div class="video-rank"><div class="rank-badge rank-n">#9</div><span class="rank-label" data-i18n="v9_label">Lifestyle nómada</span></div>
         <div class="video-embed-wrap">
-          <blockquote class="instagram-media"
-            data-instgrm-permalink="https://www.instagram.com/reel/CtaLXHAAoD7/"
-            data-instgrm-version="14"
-            style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:unset;padding:0;width:100%;">
-          </blockquote>
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/CtaLXHAAoD7/" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:0;max-width:100%;min-width:unset;padding:0;width:100%;"></blockquote>
         </div>
       </div>
-
     </div>
   </div>
 </section>
@@ -900,38 +865,37 @@ hr.dv { border: none; border-top: 1px solid rgba(93,58,158,.1); margin: clamp(32
 <!-- CTA -->
 <section class="cta-section" id="contacto">
   <div class="section-inner">
-    <div class="cta-tag">✉️ Proponer colaboración</div>
-    <div class="cta-title">¿Tu hotel en el<br><em>mapa nómada?</em></div>
-    <p class="cta-text">
+    <div class="cta-tag" data-i18n="cta_tag">✉️ Proponer colaboración</div>
+    <div class="cta-title" data-i18n-html="cta_title">¿Tu hotel en el<br><em>mapa nómada?</em></div>
+    <p class="cta-text" data-i18n-html="cta_text">
       Estoy buscando alojamientos que quieran llegar a una audiencia de
       <strong>profesionales remotos que eligen dónde hospedarse</strong> basándose en recomendaciones genuinas.
       ¿Hablamos?
     </p>
     <div class="cta-buttons">
-      <a href="mailto:camichavesthg@gmail.com?subject=Propuesta%20de%20canje%20-%20%5BNombre%20del%20hotel%5D" class="btn-primary">
+      <a href="mailto:camichavesthg@gmail.com?subject=Propuesta%20de%20canje%20-%20%5BNombre%20del%20hotel%5D" class="btn-primary" data-i18n="cta_btn_mail">
         ✉️ Escribirme por mail
       </a>
-      <a href="https://www.instagram.com/chica_apps/" target="_blank" rel="noopener" class="btn-secondary">
+      <a href="https://www.instagram.com/chica_apps/" target="_blank" rel="noopener" class="btn-secondary" data-i18n="cta_btn_ig">
         📲 Ver mi Instagram
       </a>
     </div>
-
     <div class="cta-divider">
       <div class="cta-stat-item">
         <div class="cta-stat-num">92<span>.7K</span></div>
-        <div class="cta-stat-label">Views / mes</div>
+        <div class="cta-stat-label" data-i18n="cta_s1">Views / mes</div>
       </div>
       <div class="cta-stat-item">
         <div class="cta-stat-num">186</div>
-        <div class="cta-stat-label">Comentarios / mes</div>
+        <div class="cta-stat-label" data-i18n="cta_s2">Comentarios / mes</div>
       </div>
       <div class="cta-stat-item">
         <div class="cta-stat-num">323</div>
-        <div class="cta-stat-label">Compartidos / mes</div>
+        <div class="cta-stat-label" data-i18n="cta_s3">Compartidos / mes</div>
       </div>
       <div class="cta-stat-item">
         <div class="cta-stat-num">37<span>%</span></div>
-        <div class="cta-stat-label">Alcance nuevo</div>
+        <div class="cta-stat-label" data-i18n="cta_s4">Alcance nuevo</div>
       </div>
     </div>
   </div>
@@ -940,17 +904,204 @@ hr.dv { border: none; border-top: 1px solid rgba(93,58,158,.1); margin: clamp(32
 <!-- FOOTER -->
 <footer class="footer">
   <div class="footer-brand">Camila | Chica Apps</div>
-  <div class="footer-text">Media Kit · Junio 2026</div>
+  <div class="footer-text" data-i18n="footer_text">Media Kit · Junio 2026</div>
   <a href="https://www.instagram.com/chica_apps/" target="_blank" rel="noopener" class="footer-ig">@chica_apps</a>
 </footer>
 
 <!-- Instagram embed script -->
 <script async defer src="https://www.instagram.com/embed.js"></script>
+
 <script>
-  // Re-process embeds once the script loads (in case of SPA or dynamic load)
-  window.addEventListener('load', function() {
-    if (window.instgrm) window.instgrm.Embeds.process();
+// ── TRANSLATIONS ──────────────────────────────────────────────────────────
+var T = {
+  es: {
+    nav_cta:      'Proponer canje ✉️',
+    hero_tag:     'Media Kit · Colaboraciones con Alojamientos',
+    hero_h1:      'Nómada digital.<br><em>Destino: Harvard.</em>',
+    hero_sub:     'Soy <strong>Camila Chaves</strong>, ingeniera en software y creadora de contenido sobre tecnología y vida remota. Recibo a mis seguidores en cada destino que visito — <strong>y ahora viajo hacia Harvard</strong>, donde fui admitida para continuar mis estudios.',
+    pill_nomad:   '💻 Nómada digital',
+    pill_remote:  '✈️ Trabajo remoto por el mundo',
+    stat_views:       'Visualizaciones<br>últimos 30 días',
+    stat_interactions:'Interacciones<br>últimos 30 días',
+    stat_reach:       'Alcance a<br>no-seguidores',
+    stat_comments:    'Comentarios en<br>Reels (30 días)',
+    stat_shares:      'Compartidos<br>últimos 30 días',
+    stat_saves:       'Guardados<br>últimos 30 días',
+    s1_label:     '01 · Audiencia',
+    s1_title:     'Personas que <em>sí</em> se hospedan',
+    s1_highlight: 'Mi comunidad está formada por <strong>profesionales remotos, estudiantes de tecnología y nómadas digitales</strong> que toman decisiones de dónde trabajar y hospedarse basándose en recomendaciones reales. No son turistas casuales: son personas que <strong>planifican estadías, valoran la experiencia y comparten lo que viven.</strong>',
+    aud_countries:'Principales países',
+    aud_demo:     'Demografía',
+    aud_women:    'Mujeres',
+    aud_men:      'Hombres',
+    ins_reels:    'Interacciones desde Reels',
+    ins_visits:   'Visitas al perfil (30 días)',
+    ins_clicks:   'Clics en enlace externo',
+    why_label:    '¿Por qué mi audiencia le importa a tu hotel?',
+    why1_t:'Trabajan en remoto',         why1_d:'Buscan destinos con buena conectividad y lugares donde poder quedarse varios días o semanas.',
+    why2_t:'Vuelven y recomiendan',      why2_d:'Los nómadas digitales repiten destinos y generan recomendaciones boca a boca de alto valor.',
+    why3_t:'Comunidad activa',           why3_d:'186 comentarios y 323 compartidos en 30 días. Esta audiencia no solo consume: responde, pregunta y actúa.',
+    why4_t:'Toman decisiones de hospedaje', why4_d:'A diferencia de la audiencia de lifestyle general, mi comunidad está en modo "busco dónde quedarme".',
+    why5_t:'El viaje a Harvard',         why5_d:'Mi próxima etapa genera contenido aspiracional de alto alcance: un viaje internacional con destino claro y relevante.',
+    why6_t:'Confían en mí',              why6_d:'Recomiendo apps, herramientas y lugares desde la experiencia real. Mi audiencia lo sabe y lo busca.',
+    s2_label:   '02 · Propuesta',
+    s2_title:   'Opciones de <em style="color:var(--lav);">canje</em>',
+    banner_h3:  'A cambio de alojamiento por 2 noches para 2 personas, podés elegir alguna de las siguientes opciones:',
+    banner_p:   'El contenido generado tiene un <strong>alcance promedio de 92.7K visualizaciones mensuales</strong> y una tasa de engagement que supera el promedio del sector. Todas las piezas de contenido se coordinan previamente entre ambas partes.',
+    ca_badge:'Contenido UGC', ca_title:'Videos + Historias',
+    ca_li1:'3 videos UGC profesionales del alojamiento',
+    ca_li2:'Historias diarias durante la estadía',
+    ca_li3:'Mención de ubicación y etiqueta en cada publicación',
+    ca_li4:'Guión y enfoque acordado previamente',
+    ca_li5:'Videos disponibles en español o inglés',
+    cb_badge:'Desarrollo Web', cb_title:'Página o App web',
+    cb_li1:'Landing page o micro-app personalizada',
+    cb_li2:'Realizada por Designer + Ingeniera en Software',
+    cb_li3:'Diseño a medida con identidad del alojamiento',
+    cb_li4:'Entrega con acceso completo al código',
+    cc_badge:'Combinación', cc_title:'Videos + Desarrollo',
+    cc_li1:'Combinación de opciones A y B',
+    cc_li2:'Contenido UGC + entregable web',
+    cc_li3:'Ideal para alojamientos que quieren presencia digital completa',
+    cc_li4:'Alcance orgánico + herramienta propia',
+    canje_note: '<strong>Coordinación entre ambas partes:</strong> El contenido no es improvisado. Antes de la estadía acordamos juntos el guión, las locaciones a mostrar, el estilo del video, los hashtags y los tiempos de publicación. El objetivo es que el resultado sea genuino, útil para tu negocio y coherente con mi línea de contenido. Todas las piezas de contenido se coordinan previamente entre ambas partes.',
+    proceso_label:'¿Cómo funciona?',
+    p1_t:'Me escribís',   p1_d:'Me contás sobre tu alojamiento y qué opción te interesa.',
+    p2_t:'Coordinamos',   p2_d:'Definimos fechas, guión, entregables y expectativas.',
+    p3_t:'Me hospedo',    p3_d:'Genero el contenido durante la estadía de forma orgánica y natural.',
+    p4_t:'Publico',       p4_d:'Publicamos en los tiempos acordados y te comparto las métricas.',
+    s3_label:'03 · Beneficios extra',
+    s3_title:'Más que <em>un video</em>',
+    ben1_t:'Mapa de nómadas',       ben1_d:'Tu alojamiento queda incluido en mi <strong>mapa personal de recomendaciones</strong> para nómadas digitales que viajan por el mundo. Una referencia que crece y perdura más allá de los videos.',
+    ben2_t:'Código de seguimiento', ben2_d:'Te genero un <strong>código de tracking personalizado</strong> para que puedas consultar en tiempo real las métricas de cada video: visualizaciones, clics en enlace, interacciones y más.',
+    ben3_t:'Auditoría gratuita',    ben3_d:'Sesión de <strong>30 minutos con un Designer Engineer y una Software Engineer</strong> para revisar tus herramientas digitales internas o de cara al cliente y sugerirte mejoras concretas.',
+    s4_label:'04 · Contenido de referencia',
+    s4_title:'Videos de viajes<br><em>y hospedajes</em>',
+    s4_intro:'Estos son mis videos relacionados a viajes, hoteles y experiencias de hospedaje, ordenados por impacto y viralidad. Todo el contenido fue creado desde la experiencia genuina, sin libreto forzado.',
+    v1_label:'Mayor alcance', v2_label:'Alto alcance',    v3_label:'Viral orgánico',
+    v4_label:'Viajes · tecnología', v5_label:'Experiencia de viaje', v6_label:'Destino remoto',
+    v7_label:'Nómada en movimiento', v8_label:'Viaje + tecnología', v9_label:'Lifestyle nómada',
+    cta_tag:      '✉️ Proponer colaboración',
+    cta_title:    '¿Tu hotel en el<br><em>mapa nómada?</em>',
+    cta_text:     'Estoy buscando alojamientos que quieran llegar a una audiencia de <strong>profesionales remotos que eligen dónde hospedarse</strong> basándose en recomendaciones genuinas. ¿Hablamos?',
+    cta_btn_mail: '✉️ Escribirme por mail',
+    cta_btn_ig:   '📲 Ver mi Instagram',
+    cta_s1:'Views / mes', cta_s2:'Comentarios / mes', cta_s3:'Compartidos / mes', cta_s4:'Alcance nuevo',
+    footer_text:  'Media Kit · Junio 2026',
+  },
+  en: {
+    nav_cta:      'Propose a collab ✉️',
+    hero_tag:     'Media Kit · Hotel & Accommodation Collabs',
+    hero_h1:      'Digital nomad.<br><em>Destination: Harvard.</em>',
+    hero_sub:     'I\'m <strong>Camila Chaves</strong>, a software engineer and content creator about tech and remote life. I bring my audience along on every destination I visit — <strong>and now I\'m heading to Harvard</strong>, where I was admitted to continue my studies.',
+    pill_nomad:   '💻 Digital nomad',
+    pill_remote:  '✈️ Working remotely around the world',
+    stat_views:       'Views<br>last 30 days',
+    stat_interactions:'Interactions<br>last 30 days',
+    stat_reach:       'Reach to<br>non-followers',
+    stat_comments:    'Comments on<br>Reels (30 days)',
+    stat_shares:      'Shares<br>last 30 days',
+    stat_saves:       'Saves<br>last 30 days',
+    s1_label:     '01 · Audience',
+    s1_title:     'People who actually <em>travel</em>',
+    s1_highlight: 'My community is made up of <strong>remote professionals, tech students, and digital nomads</strong> who make real decisions about where to work and stay based on genuine recommendations. These aren\'t casual tourists: they <strong>plan longer stays, value the experience, and share what they live.</strong>',
+    aud_countries:'Top countries',
+    aud_demo:     'Demographics',
+    aud_women:    'Women',
+    aud_men:      'Men',
+    ins_reels:    'Interactions from Reels',
+    ins_visits:   'Profile visits (30 days)',
+    ins_clicks:   'External link clicks',
+    why_label:    'Why does my audience matter to your hotel?',
+    why1_t:'They work remotely',       why1_d:'They look for destinations with good connectivity and places where they can stay for days or weeks.',
+    why2_t:'They come back & refer',   why2_d:'Digital nomads return to destinations they love and generate high-value word-of-mouth referrals.',
+    why3_t:'Active community',         why3_d:'186 comments and 323 shares in 30 days. This audience doesn\'t just consume — they reply, ask, and act.',
+    why4_t:'They make lodging decisions', why4_d:'Unlike general lifestyle audiences, my community is actively looking for "where should I stay next."',
+    why5_t:'The Harvard journey',      why5_d:'My next chapter creates aspirational, high-reach content: an international journey with a clear and compelling destination.',
+    why6_t:'They trust me',            why6_d:'I recommend apps, tools, and places from real experience. My audience knows it and seeks it out.',
+    s2_label:   '02 · Proposal',
+    s2_title:   'Collaboration <em style="color:var(--lav);">options</em>',
+    banner_h3:  'In exchange for a 2-night stay for 2 people, you can choose one of the following options:',
+    banner_p:   'The content generated reaches an <strong>average of 92.7K monthly views</strong> with an engagement rate above industry benchmarks. All content pieces are coordinated in advance between both parties.',
+    ca_badge:'UGC Content', ca_title:'Videos + Stories',
+    ca_li1:'3 professional UGC videos of the property',
+    ca_li2:'Daily stories throughout the stay',
+    ca_li3:'Location tag and mention in every post',
+    ca_li4:'Script and angle agreed upon in advance',
+    ca_li5:'Videos available in Spanish or English',
+    cb_badge:'Web Development', cb_title:'Landing page or Web App',
+    cb_li1:'Custom landing page or micro web app',
+    cb_li2:'Built by a Designer + Software Engineer',
+    cb_li3:'Tailored design matching your property\'s identity',
+    cb_li4:'Full code access delivered to you',
+    cc_badge:'Combination', cc_title:'Videos + Development',
+    cc_li1:'Combination of options A and B',
+    cc_li2:'UGC content + web deliverable',
+    cc_li3:'Ideal for properties that want a complete digital presence',
+    cc_li4:'Organic reach + your own tool',
+    canje_note: '<strong>Coordination between both parties:</strong> Content is never improvised. Before the stay, we agree on the script, locations to feature, video style, hashtags, and publishing schedule. The goal is a result that feels genuine, serves your business, and stays true to my content style. All content pieces are coordinated in advance between both parties.',
+    proceso_label:'How does it work?',
+    p1_t:'You reach out',  p1_d:'Tell me about your property and which option you\'re interested in.',
+    p2_t:'We coordinate', p2_d:'We set dates, script, deliverables, and expectations.',
+    p3_t:'I check in',    p3_d:'I create content during the stay in an organic, natural way.',
+    p4_t:'I publish',     p4_d:'We publish on the agreed schedule and I share the metrics with you.',
+    s3_label:'03 · Extra benefits',
+    s3_title:'More than <em>a video</em>',
+    ben1_t:'Nomad map',             ben1_d:'Your property gets added to my <strong>personal recommendation map</strong> for digital nomads traveling the world — a lasting reference that keeps growing beyond the videos.',
+    ben2_t:'Tracking code',         ben2_d:'I\'ll generate a <strong>personalized tracking code</strong> so you can check real-time metrics for every video: views, link clicks, interactions, and more.',
+    ben3_t:'Free audit session',    ben3_d:'A <strong>30-minute session with a Designer Engineer and a Software Engineer</strong> to review your internal or customer-facing digital tools and suggest concrete improvements.',
+    s4_label:'04 · Reference content',
+    s4_title:'Travel &amp; hospitality<br><em>videos</em>',
+    s4_intro:'These are my videos related to travel, hotels, and hospitality experiences, ranked by impact and reach. All content was created from genuine experience — no forced scripts.',
+    v1_label:'Top reach',       v2_label:'High reach',         v3_label:'Organic viral',
+    v4_label:'Travel · tech',   v5_label:'Travel experience',  v6_label:'Remote destination',
+    v7_label:'Nomad on the go', v8_label:'Travel + tech',      v9_label:'Nomad lifestyle',
+    cta_tag:      '✉️ Propose a collaboration',
+    cta_title:    'Your hotel on the<br><em>nomad map?</em>',
+    cta_text:     'I\'m looking for properties that want to reach an audience of <strong>remote professionals who choose where to stay</strong> based on genuine recommendations. Let\'s talk?',
+    cta_btn_mail: '✉️ Send me an email',
+    cta_btn_ig:   '📲 See my Instagram',
+    cta_s1:'Views / month', cta_s2:'Comments / month', cta_s3:'Shares / month', cta_s4:'New reach',
+    footer_text:  'Media Kit · June 2026',
+  }
+};
+
+var currentLang = 'es';
+
+function setLang(lang) {
+  if (lang === currentLang) return;
+  currentLang = lang;
+  document.documentElement.lang = lang;
+
+  // update toggle buttons
+  document.querySelectorAll('.lang-btn').forEach(function(b) {
+    b.classList.toggle('active', b.dataset.lang === lang);
   });
+
+  // fade out
+  var els = document.querySelectorAll('[data-i18n], [data-i18n-html]');
+  els.forEach(function(el) { el.classList.add('lang-fade'); });
+
+  setTimeout(function() {
+    // update text nodes
+    document.querySelectorAll('[data-i18n]').forEach(function(el) {
+      var key = el.getAttribute('data-i18n');
+      if (T[lang][key] !== undefined) el.textContent = T[lang][key];
+    });
+    // update html nodes
+    document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
+      var key = el.getAttribute('data-i18n-html');
+      if (T[lang][key] !== undefined) el.innerHTML = T[lang][key];
+    });
+    // fade back in
+    els.forEach(function(el) { el.classList.remove('lang-fade'); });
+  }, 150);
+}
+
+// Re-process Instagram embeds on load
+window.addEventListener('load', function() {
+  if (window.instgrm) window.instgrm.Embeds.process();
+});
 </script>
 
 </body>
