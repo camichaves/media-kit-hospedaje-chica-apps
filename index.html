@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -529,8 +529,8 @@ a:focus-visible, button:focus-visible {
   </div>
   <div class="nav-right">
     <div class="lang-toggle" role="group" aria-label="Language">
-      <button class="lang-btn active" data-lang="es" aria-pressed="true" onclick="setLang('es')">ES</button>
-      <button class="lang-btn" data-lang="en" aria-pressed="false" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" data-lang="es" aria-pressed="false" onclick="setLang('es')">ES</button>
+      <button class="lang-btn active" data-lang="en" aria-pressed="true" onclick="setLang('en')">EN</button>
     </div>
     <a href="#contacto" class="nav-cta" data-i18n="nav_cta">Proponer canje ✉️</a>
   </div>
@@ -1135,6 +1135,22 @@ function setLang(lang) {
     els.forEach(function(el) { el.classList.remove('lang-fade'); });
   }, 150);
 }
+
+// Apply the default language (English) immediately, without the fade transition,
+// so the page renders in EN from the first paint instead of flashing Spanish.
+(function initLang() {
+  var lang = 'en';
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(function(el) {
+    var key = el.getAttribute('data-i18n');
+    if (T[lang][key] !== undefined) el.textContent = T[lang][key];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
+    var key = el.getAttribute('data-i18n-html');
+    if (T[lang][key] !== undefined) el.innerHTML = T[lang][key];
+  });
+  currentLang = lang;
+})();
 
 // Re-process Instagram embeds on load
 window.addEventListener('load', function() {
